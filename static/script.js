@@ -36,17 +36,25 @@ const projects = [
         featured: false
     },
     {
-        id: "segundo-intento-certificacion",
-        icon: "bi-award",
-        title: "Segundo intento de certificación",
-        description: "Un proyecto para continuar practicando y reforzar conocimientos durante mi preparación para la certificación.",
-        technologies: [
-            { name: "Python", icon: "bi-filetype-py" },
-            { name: "Preparación", icon: "bi-journal-check" }
-        ],
+        id: "cine",
+        icon: "bi-film",
+        title: "Cine",
+        description: "Proyecto personal para practicar programación y crear una experiencia relacionada con el mundo del cine.",
+        technologies: [],
         githubUrl: "https://github.com/benjamin1514",
         demoUrl: "",
-        status: "En preparación",
+        status: "Proyecto personal",
+        featured: false
+    },
+    {
+        id: "querido-diario",
+        icon: "bi-journal-heart",
+        title: "Querido Diario",
+        description: "Proyecto personal para seguir practicando desarrollo y presentar contenido de forma clara y organizada.",
+        technologies: [],
+        githubUrl: "https://github.com/benjamin1514",
+        demoUrl: "",
+        status: "Proyecto personal",
         featured: false
     }
 ];
@@ -109,7 +117,7 @@ function renderSecondaryProjects() {
                     <span class="status-badge status-en-progreso"><i class="bi bi-circle-fill me-1" aria-hidden="true"></i>${project.status}</span>
                     <h4 class="project-title"><i class="bi ${project.icon} me-2" aria-hidden="true"></i>${project.title}</h4>
                     <p class="project-desc">${project.description}</p>
-                    <div class="tags">${tags}</div>
+                    ${tags ? `<div class="tags">${tags}</div>` : ""}
                     <div class="project-links mt-auto">
                         <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="bi bi-github me-2" aria-hidden="true"></i>GitHub</a>
                         ${demoBtn}
