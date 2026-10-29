@@ -4,20 +4,32 @@
 const projects = [
     {
         id: "huellapet",
+        icon: "bi-heart-pulse",
         badge: "PROYECTO DESTACADO",
         title: "HuellaPet 🐾",
         description: "Una plataforma para acceder a la ficha de una mascota mediante un código QR o tecnología NFC, según la interfaz del proyecto.",
         extraText: "El propósito principal es facilitar el acceso rápido a la información relevante de la mascota en caso de emergencia o extravío.",
-        technologies: ["Python", "HTML5", "CSS3", "JavaScript", "QR / NFC"],
+        technologies: [
+            { name: "Python", icon: "bi-filetype-py" },
+            { name: "HTML5", icon: "bi-filetype-html" },
+            { name: "CSS3", icon: "bi-filetype-css" },
+            { name: "JavaScript", icon: "bi-filetype-js" },
+            { name: "QR / NFC", icon: "bi-qr-code-scan" }
+        ],
         githubUrl: "https://github.com/benjamin1514/huellapet",
         demoUrl: "#proyectos", // Enlace de navegación interno para "Ver proyecto"
         featured: true
     },
     {
         id: "gestor-tareas",
+        icon: "bi-activity",
         title: "Posture Lab",
         description: "Proyecto enfocado en explorar herramientas digitales para promover una mejor postura y hábitos saludables.",
-        technologies: ["HTML5", "CSS3", "JavaScript"],
+        technologies: [
+            { name: "HTML5", icon: "bi-filetype-html" },
+            { name: "CSS3", icon: "bi-filetype-css" },
+            { name: "JavaScript", icon: "bi-filetype-js" }
+        ],
         githubUrl: "https://github.com/benjamin1514",
         demoUrl: "",
         status: "Proyecto",
@@ -25,9 +37,13 @@ const projects = [
     },
     {
         id: "segundo-intento-certificacion",
+        icon: "bi-award",
         title: "Segundo intento de certificación",
         description: "Un proyecto para continuar practicando y reforzar conocimientos durante mi preparación para la certificación.",
-        technologies: ["Python", "Aprendizaje"],
+        technologies: [
+            { name: "Python", icon: "bi-filetype-py" },
+            { name: "Preparación", icon: "bi-journal-check" }
+        ],
         githubUrl: "https://github.com/benjamin1514",
         demoUrl: "",
         status: "En preparación",
@@ -47,7 +63,7 @@ function renderFeaturedProject() {
     if (!project) return;
 
     const tags = project.technologies
-        .map(t => `<span class="tag tag-huellapet">${t}</span>`)
+        .map(technology => `<span class="tag project-tech tag-huellapet"><i class="bi ${technology.icon}" aria-hidden="true"></i>${technology.name}</span>`)
         .join("");
 
     container.innerHTML = `
@@ -55,7 +71,7 @@ function renderFeaturedProject() {
             <div class="huellapet-grid">
                 <div class="huellapet-info">
                     <span class="huellapet-badge">${project.badge}</span>
-                    <h3 class="huellapet-title">${project.title}</h3>
+                    <h3 class="huellapet-title"><i class="bi ${project.icon} me-2" aria-hidden="true"></i>${project.title}</h3>
                     <p class="huellapet-desc">${project.description}</p>
                     <p class="huellapet-extra">${project.extraText}</p>
                     
@@ -64,8 +80,8 @@ function renderFeaturedProject() {
                     </div>
 
                     <div class="huellapet-buttons">
-                        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-huellapet-primary">Explorar en GitHub</a>
-                        <a href="${project.demoUrl}" class="btn btn-huellapet-secondary">Ver proyecto</a>
+                        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-huellapet-primary"><i class="bi bi-github me-2" aria-hidden="true"></i>Explorar en GitHub</a>
+                        <a href="${project.demoUrl}" class="btn btn-huellapet-secondary"><i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Ver proyecto</a>
                     </div>
                 </div>
             </div>
@@ -82,18 +98,20 @@ function renderSecondaryProjects() {
         const demoBtn = project.demoUrl 
             ? `<a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Demo</a>` 
             : "";
-        const tags = project.technologies.map(t => `<span class="tag">${t}</span>`).join("");
+        const tags = project.technologies
+            .map(technology => `<span class="tag project-tech"><i class="bi ${technology.icon}" aria-hidden="true"></i>${technology.name}</span>`)
+            .join("");
 
         return `
             <div class="col-12 col-md-6">
               <article class="card project-card h-100">
                 <div class="card-body d-flex flex-column">
-                    <span class="status-badge status-en-progreso">${project.status}</span>
-                    <h4 class="project-title">${project.title}</h4>
+                    <span class="status-badge status-en-progreso"><i class="bi bi-circle-fill me-1" aria-hidden="true"></i>${project.status}</span>
+                    <h4 class="project-title"><i class="bi ${project.icon} me-2" aria-hidden="true"></i>${project.title}</h4>
                     <p class="project-desc">${project.description}</p>
                     <div class="tags">${tags}</div>
                     <div class="project-links mt-auto">
-                        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">GitHub</a>
+                        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="bi bi-github me-2" aria-hidden="true"></i>GitHub</a>
                         ${demoBtn}
                     </div>
                 </div>
@@ -130,9 +148,93 @@ function setupUI() {
     }
 }
 
+function setupMatrixBackground() {
+    const canvas = document.getElementById("matrixBackground");
+    const context = canvas?.getContext("2d");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!canvas || !context || reducedMotion.matches) return;
+
+    const characters = "アイウエオカキクケコサシスセソタチツテトナニヌネノ012345789{}[]<>/\\";
+    const fontSize = 16;
+    let columns = [];
+    let width = 0;
+    let height = 0;
+    let lastFrame = 0;
+    let animationId = 0;
+
+    function resizeCanvas() {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width * pixelRatio;
+        canvas.height = height * pixelRatio;
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        context.font = `${fontSize}px "JetBrains Mono", monospace`;
+        columns = Array.from({ length: Math.ceil(width / fontSize) }, () =>
+            Math.random() * (height / fontSize)
+        );
+    }
+
+    function drawFrame(timestamp) {
+        animationId = 0;
+        if (document.hidden || reducedMotion.matches) return;
+
+        if (timestamp - lastFrame >= 50) {
+            lastFrame = timestamp;
+            context.clearRect(0, 0, width, height);
+
+            columns.forEach((position, column) => {
+                const x = column * fontSize;
+                const y = position * fontSize;
+                for (let trail = 0; trail < 6; trail += 1) {
+                    const trailY = y - trail * fontSize;
+                    if (trailY < 0) continue;
+                    context.fillStyle = `rgba(86, 242, 195, ${0.72 - trail * 0.1})`;
+                    context.fillText(
+                        characters[Math.floor(Math.random() * characters.length)],
+                        x,
+                        trailY
+                    );
+                }
+
+                columns[column] += Math.random() * 0.35 + 0.35;
+                if (y > height && Math.random() > 0.975) columns[column] = 0;
+            });
+        }
+
+        animationId = window.requestAnimationFrame(drawFrame);
+    }
+
+    function startAnimation() {
+        if (!animationId && !document.hidden && !reducedMotion.matches) {
+            animationId = window.requestAnimationFrame(drawFrame);
+        }
+    }
+
+    function stopAnimation() {
+        if (animationId) window.cancelAnimationFrame(animationId);
+        animationId = 0;
+        context.clearRect(0, 0, width, height);
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    startAnimation();
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stopAnimation();
+        else startAnimation();
+    });
+    reducedMotion.addEventListener("change", event => {
+        if (event.matches) stopAnimation();
+        else startAnimation();
+    });
+}
+
 // Inicialización de funciones tras la carga del DOM
 document.addEventListener("DOMContentLoaded", () => {
     renderFeaturedProject();
     renderSecondaryProjects();
     setupUI();
+    setupMatrixBackground();
 });

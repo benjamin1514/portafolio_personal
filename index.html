@@ -8,10 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
+    <canvas id="matrixBackground" aria-hidden="true"></canvas>
 
     <!-- Navegación -->
     <header class="header">
@@ -32,18 +35,30 @@
 
     <main>
         <!-- Sección Inicio (Hero) -->
-        <section id="hero" class="hero" style="background: #171c1e;">
+        <section id="hero" class="hero">
             <div class="container hero-content">
                 <span class="badge-status">Construyendo proyectos y aprendiendo constantemente</span>
                 <p class="hero-greeting">Me llamo</p>
-                <h1 class="hero-name">Benjamín</h1>
-                <h2 class="hero-subtitle">Desarrollador Full Stack Python en formación</h2>
+                <h1 class="hero-name">
+                    <span>Benjamín</span>
+                    <span class="desktop-illustration" aria-hidden="true">
+                        <span class="desktop-monitor">
+                            <span class="desktop-screen">
+                                <span class="desktop-screen-bar"><span>● ● ●</span> portfolio.py</span>
+                                <span class="desktop-code"><span>01</span> def crear():<br><span>02</span> &nbsp; return "ideas"</span>
+                            </span>
+                        </span>
+                        <span class="desktop-stand"></span>
+                        <span class="desktop-base"></span>
+                    </span>
+                </h1>
+                <h2 class="hero-subtitle">Desarrollador Full Stack Python</h2>
                 <blockquote class="hero-quote">
                     "Desarrollo soluciones digitales combinando programación, creatividad y aprendizaje constante."
                 </blockquote>
                 <div class="hero-buttons">
-                    <a href="#proyectos" class="btn btn-primary">Explorar proyectos</a>
-                    <a href="#contacto" class="btn btn-secondary">Contactarme</a>
+                    <a href="#proyectos" class="btn btn-primary"><i class="bi bi-folder2-open me-2" aria-hidden="true"></i>Explorar proyectos</a>
+                    <a href="#contacto" class="btn btn-secondary"><i class="bi bi-chat-dots me-2" aria-hidden="true"></i>Contactarme</a>
                 </div>
             </div>
         </section>
@@ -62,42 +77,85 @@
         <!-- Sección Tecnologías -->
         <section id="tecnologias" class="section py-5">
             <div class="container">
-                <h2 class="section-title">Lo que ya sé</h2>
+                <h2 class="section-title"><i class="bi bi-code-square me-2" aria-hidden="true"></i>Lo que ya sé</h2>
                 <p class="lead text-center mb-4">Estas son las herramientas y conocimientos que aplico en mis proyectos.</p>
                 <div class="row g-4">
                     <div class="col-12">
-                        <div class="card skill-category p-4 p-md-5">
-                            <h3 class="h4 fw-semibold mb-3">Lenguajes y Desarrollo Web</h3>
-                            <div class="tags">
-                                <span class="tag fw-semibold">Python</span>
-                                <span class="tag fw-semibold">HTML5</span>
-                                <span class="tag fw-semibold">CSS3</span>
-                                <span class="tag fw-semibold">JavaScript</span>
-                            </div>
-                        </div>
+                        <h3 class="h4 fw-semibold mb-0"><i class="bi bi-braces-asterisk me-2" aria-hidden="true"></i>Lenguajes y Desarrollo Web</h3>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-filetype-py me-2" aria-hidden="true"></i>Python</h4>
+                            <p class="mb-0">Estoy aprendiendo a resolver tareas con variables, condiciones, ciclos y funciones. También puedo organizar datos y separar un programa en partes más fáciles de entender y mantener.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-filetype-html me-2" aria-hidden="true"></i>HTML5</h4>
+                            <p class="mb-0">Construyo la estructura de una página usando etiquetas semánticas para títulos, secciones, enlaces, imágenes y formularios. Procuro que el contenido tenga un orden claro y sea fácil de recorrer.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-filetype-css me-2" aria-hidden="true"></i>CSS3</h4>
+                            <p class="mb-0">Personalizo colores, tipografías, espacios y componentes para dar identidad visual a una página. Uso reglas responsive para que la interfaz se adapte a pantallas de distintos tamaños.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-filetype-js me-2" aria-hidden="true"></i>JavaScript</h4>
+                            <p class="mb-0">Añado interactividad mediante eventos y manipulación del DOM. Puedo actualizar contenido dinámico y controlar acciones de la interfaz, como la navegación móvil.</p>
+                        </article>
                     </div>
 
-                    <div class="col-12">
-                        <div class="card skill-category p-4 p-md-5">
-                            <h3 class="h4 fw-semibold mb-3">Herramientas</h3>
-                            <div class="tags">
-                                <span class="tag fw-semibold">Git</span>
-                                <span class="tag fw-semibold">GitHub</span>
-                                <span class="tag fw-semibold">Visual Studio Code</span>
-                            </div>
-                        </div>
+                    <div class="col-12 mt-3">
+                        <h3 class="h4 fw-semibold mb-0"><i class="bi bi-tools me-2" aria-hidden="true"></i>Herramientas</h3>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-git me-2" aria-hidden="true"></i>Git</h4>
+                            <p class="mb-0">Lo uso para guardar cambios de forma ordenada y consultar el historial del código. Así puedo seguir la evolución de un proyecto y reconocer qué se modificó.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-github me-2" aria-hidden="true"></i>GitHub</h4>
+                            <p class="mb-0">Publico y organizo repositorios para tener mis proyectos disponibles en línea. También puedo compartir el código y consultar los archivos desde distintos equipos.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-code-slash me-2" aria-hidden="true"></i>Visual Studio Code</h4>
+                            <p class="mb-0">Lo utilizo como entorno de trabajo para editar archivos, navegar por el proyecto y ejecutar herramientas que me ayudan a desarrollar y revisar el código.</p>
+                        </article>
                     </div>
 
-                    <div class="col-12">
-                        <div class="card skill-category p-4 p-md-5">
-                            <h3 class="h4 fw-semibold mb-3">Conocimientos</h3>
-                            <div class="tags">
-                                <span class="tag fw-semibold">Lógica de programación</span>
-                                <span class="tag fw-semibold">Fundamentos de POO</span>
-                                <span class="tag fw-semibold">Desarrollo de interfaces</span>
-                                <span class="tag fw-semibold">Resolución de problemas</span>
-                            </div>
-                        </div>
+                    <div class="col-12 mt-3">
+                        <h3 class="h4 fw-semibold mb-0"><i class="bi bi-lightbulb me-2" aria-hidden="true"></i>Conocimientos</h3>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-diagram-3 me-2" aria-hidden="true"></i>Lógica de programación</h4>
+                            <p class="mb-0">Divido un problema en pasos pequeños, identifico qué datos necesito y defino cómo procesarlos. Aplico variables, condiciones y ciclos para convertir esos pasos en instrucciones.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-boxes me-2" aria-hidden="true"></i>Fundamentos de POO</h4>
+                            <p class="mb-0">Conozco los conceptos iniciales de clases y objetos, y cómo agrupar datos y comportamientos relacionados. Esto me ayuda a estructurar programas de forma más ordenada.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-window me-2" aria-hidden="true"></i>Desarrollo de interfaces</h4>
+                            <p class="mb-0">Organizo textos, botones, formularios y navegación para que las personas encuentren lo que buscan. También considero la adaptación a móviles y la claridad visual.</p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card skill-category h-100 p-4">
+                            <h4 class="h5 fw-semibold"><i class="bi bi-puzzle me-2" aria-hidden="true"></i>Resolución de problemas</h4>
+                            <p class="mb-0">Primero intento entender el objetivo y reproducir el problema; luego pruebo una solución y reviso el resultado. Si algo falla, uso el error como pista para corregir y volver a probar.</p>
+                        </article>
                     </div>
                 </div>
 
@@ -107,7 +165,7 @@
         <!-- Sección Proyectos -->
         <section id="proyectos" class="section py-5">
             <div class="container">
-                <h2 class="section-title">Proyectos</h2>
+                <h2 class="section-title"><i class="bi bi-kanban me-2" aria-hidden="true"></i>Proyectos</h2>
                 
                 <!-- Contenedor del proyecto destacado (HuellaPet) -->
                 <div id="featuredProjectContainer" class="featured-project-wrapper">
@@ -125,35 +183,39 @@
         <!-- Sección Contacto -->
         <section id="contacto" class="section py-5">
             <div class="container">
-                <h2 class="section-title">Contacto</h2>
+                <h2 class="section-title"><i class="bi bi-send me-2" aria-hidden="true"></i>Contacto</h2>
                 <div class="row g-3">
-                    <div class="col-12 col-lg-6"><div class="card contact-info h-100 p-4">
-                        <h3>Información de contacto</h3>
-                        <p>¿Tienes alguna consulta o propuesta? Puedes escribirme directamente o revisar mis perfiles:</p>
-                        <p><strong>Correo:</strong> <a href="mailto:benjamindelgadof1@gmail.com" id="contactEmail">tu-correo@ejemplo.com</a></p>
-                        <div class="social-links">
-                            <a href="https://github.com/benjamin1514" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
+                    <div class="col-12 col-lg-6">
+                        <div class="card contact-info h-100 p-4">
+                            <h3><i class="bi bi-person-lines-fill me-2" aria-hidden="true"></i>Información de contacto</h3>
+                            <p>¿Tienes alguna consulta o propuesta? Puedes escribirme directamente o revisar mis perfiles:</p>
+                            <p><strong>Correo:</strong> <a href="mailto:benjamindelgadof1@gmail.com" id="contactEmail">benjamindelgadof1@gmail.com</a></p>
+                            <div class="social-links">
+                                <a href="https://github.com/benjamin1514" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><i class="bi bi-github me-2" aria-hidden="true"></i>GitHub</a>
+                            </div>
                         </div>
-                    </div></div>
+                    </div>
 
-                    <div class="col-12 col-lg-6"><div class="card contact-form-card h-100 p-4">
-                        <h3>Enviarme un mensaje</h3>
-                        <p class="form-notice">Al presionar el botón se abrirá tu aplicación de correo predeterminada.</p>
-                        <form id="contactForm" action="mailto:benjamindelgadof1@gmail.com" method="post" enctype="text/plain">
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input class="form-control" type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Correo electrónico</label>
-                                <input class="form-control" type="email" id="email" name="email" required placeholder="tu@correo.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="mensaje">Mensaje</label>
-                                <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required placeholder="Escribe tu mensaje aquí..."></textarea>
-                            </div></div>
-                            <button type="submit" class="btn btn-primary">Redactar correo</button>
-                        </form>
+                    <div class="col-12 col-lg-6">
+                        <div class="card contact-form-card h-100 p-4">
+                            <h3><i class="bi bi-envelope-paper me-2" aria-hidden="true"></i>Enviarme un mensaje</h3>
+                            <p class="form-notice">Al presionar el botón se abrirá tu aplicación de correo predeterminada.</p>
+                            <form id="contactForm" action="mailto:benjamindelgadof1@gmail.com" method="post" enctype="text/plain">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input class="form-control" type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Correo electrónico</label>
+                                    <input class="form-control" type="email" id="email" name="email" required placeholder="tu@correo.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="mensaje">Mensaje</label>
+                                    <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-envelope me-2" aria-hidden="true"></i>Redactar correo</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
