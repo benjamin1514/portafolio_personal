@@ -9,45 +9,31 @@ const projects = [
         description: "Una plataforma para acceder a la ficha de una mascota mediante un código QR o tecnología NFC, según la interfaz del proyecto.",
         extraText: "El propósito principal es facilitar el acceso rápido a la información relevante de la mascota en caso de emergencia o extravío.",
         technologies: ["Python", "HTML5", "CSS3", "JavaScript", "QR / NFC"],
-        image: "static/images/huellapet.png", // Ruta requerida
         githubUrl: "https://github.com/benjamin1514/huellapet",
         demoUrl: "#proyectos", // Enlace de navegación interno para "Ver proyecto"
         featured: true
     },
     {
         id: "gestor-tareas",
-        title: "Gestor de Tareas",
-        description: "Aplicación sencilla para agregar, listar, completar y eliminar actividades diarias.",
-        technologies: ["Python"],
-        githubUrl: "https://github.com/benjamin1514",
-        demoUrl: "",
-        status: "En progreso",
-        featured: false
-    },
-    {
-        id: "calculadora",
-        title: "Calculadora Web",
-        description: "Herramienta interactiva para operaciones matemáticas básicas.",
+        title: "Posture Lab",
+        description: "Proyecto enfocado en explorar herramientas digitales para promover una mejor postura y hábitos saludables.",
         technologies: ["HTML5", "CSS3", "JavaScript"],
         githubUrl: "https://github.com/benjamin1514",
         demoUrl: "",
-        status: "En desarrollo",
+        status: "Proyecto",
         featured: false
     },
     {
-        id: "gestor-gastos",
-        title: "Gestor de Gastos Personales",
-        description: "Programa para registrar ingresos, gastos y calcular saldos.",
-        technologies: ["Python"],
+        id: "segundo-intento-certificacion",
+        title: "Segundo intento de certificación",
+        description: "Un proyecto para continuar practicando y reforzar conocimientos durante mi preparación para la certificación.",
+        technologies: ["Python", "Aprendizaje"],
         githubUrl: "https://github.com/benjamin1514",
         demoUrl: "",
-        status: "En desarrollo",
+        status: "En preparación",
         featured: false
     }
 ];
-
-// Tecnologías futuras por aprender
-const learningNext = ["React", "FastAPI", "Django", "Bases de Datos SQL", "Docker"];
 
 // ==========================================
 // 2. Funciones de Renderizado Dinámico
@@ -67,7 +53,6 @@ function renderFeaturedProject() {
     container.innerHTML = `
         <div class="huellapet-card">
             <div class="huellapet-grid">
-                <!-- Columna Izquierda: Información -->
                 <div class="huellapet-info">
                     <span class="huellapet-badge">${project.badge}</span>
                     <h3 class="huellapet-title">${project.title}</h3>
@@ -82,16 +67,6 @@ function renderFeaturedProject() {
                         <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-huellapet-primary">Explorar en GitHub</a>
                         <a href="${project.demoUrl}" class="btn btn-huellapet-secondary">Ver proyecto</a>
                     </div>
-                </div>
-
-                <!-- Columna Derecha: Captura de pantalla oficial -->
-                <div class="huellapet-frame">
-                    <img 
-                        src="${project.image}" 
-                        alt="Captura de pantalla de la interfaz de HuellaPet" 
-                        class="huellapet-img"
-                        onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'huellapet-placeholder\\'>🐾<br><strong>Copiar imagen a:</strong><br><code>static/images/huellapet.png</code></div>';"
-                    >
                 </div>
             </div>
         </div>
@@ -110,26 +85,22 @@ function renderSecondaryProjects() {
         const tags = project.technologies.map(t => `<span class="tag">${t}</span>`).join("");
 
         return `
-            <div class="card project-card">
-                <div>
+            <div class="col-12 col-md-6">
+              <article class="card project-card h-100">
+                <div class="card-body d-flex flex-column">
                     <span class="status-badge status-en-progreso">${project.status}</span>
                     <h4 class="project-title">${project.title}</h4>
                     <p class="project-desc">${project.description}</p>
                     <div class="tags">${tags}</div>
+                    <div class="project-links mt-auto">
+                        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">GitHub</a>
+                        ${demoBtn}
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">GitHub</a>
-                    ${demoBtn}
-                </div>
+              </article>
             </div>
         `;
     }).join("");
-}
-
-// Carga de lista de tecnologías por aprender
-function renderLearningNext() {
-    const container = document.getElementById("learningNextContainer");
-    container.innerHTML = learningNext.map(t => `<span class="tag">${t}</span>`).join("");
 }
 
 // ==========================================
@@ -163,6 +134,5 @@ function setupUI() {
 document.addEventListener("DOMContentLoaded", () => {
     renderFeaturedProject();
     renderSecondaryProjects();
-    renderLearningNext();
     setupUI();
 });
